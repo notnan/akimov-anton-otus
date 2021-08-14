@@ -1,0 +1,7 @@
+{
+  "Settings": {
+    "FILE_SIZE": 104857600,
+    "NUMBERS_DIRECTORY": "numbers",
+    "RAM_LIMIT": 52428800
+  }
+}
