@@ -7,6 +7,7 @@ export class Collector extends Readable {
     private numbersList: NumbersList[];
     private numbersDirectory: string;
     private maxNum;
+    private currentString = '';
 
     constructor(opt) {
         super(opt)
@@ -15,12 +16,21 @@ export class Collector extends Readable {
     async _read() {
         while (this.hasNumbers()) {
             const number = await this.getSmallestNumberFromStreams();
-            const buf = Buffer.from(`${number}\n`);
-            this.displayProgress(number);
-            this.push(buf);
-        }
-    }
+            const currentNum =`${number}\n`;
 
+            if (Buffer.byteLength(this.currentString, 'utf-8') < 10000) {
+                this.currentString += currentNum;
+            } else {
+                this.push(Buffer.from(this.currentString));
+                this.currentString = '';
+                this.displayProgress(number);
+            }
+        }
+        if (this.currentString) {
+            this.push(Buffer.from(this.currentString))
+        }
+
+    }
     async init(memoryLimit, numbersDirectory, maxNum) {
         this.maxNum = maxNum;
         this.numbersDirectory = numbersDirectory;

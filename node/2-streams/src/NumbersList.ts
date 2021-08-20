@@ -1,9 +1,7 @@
 import {createReadStream, ReadStream} from "fs";
-import {NumbersStream} from "./streams";
 import toArrayBuffer from 'to-arraybuffer'
 
 export class NumbersList {
-    numStream: NumbersStream;
     fsStream: ReadStream;
     currentNumbers: Uint32Array;
     currentIndex: number = 0;
@@ -11,17 +9,12 @@ export class NumbersList {
 
     constructor(filePath, fileSize) {
         this.fsStream = createReadStream(filePath,      {highWaterMark: Math.round(fileSize)});
-        this.numStream = new NumbersStream({objectMode: true});
         this.fsStream.on('end', this.disable);
     }
 
     public getNumbersFromStream() {
         return new Promise((resolve, reject) => {
             this.fsStream.resume();
-
-            this.fsStream.on('end', () => {
-                reject();
-            });
 
             this.fsStream.on('data', (chunk) => {
                 this.fsStream.pause();
