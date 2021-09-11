@@ -4,15 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npx jest",
     "start": "npm run build && node build/index.js",
     "build": "rimraf ./build && tsc"
   },
   "author": "Anton Akimov",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@types/jest": "^27.0.1",
     "@types/node": "^16.0.0",
+    "babel-jest": "^27.1.0",
+    "jest": "^27.1.0",
     "rimraf": "^3.0.2",
-    "ts-node": "^10.0.0"
+    "ts-jest": "^27.0.5",
+    "ts-node": "^10.0.0",
+    "typescript": "^3.9.10"
   }
 }
