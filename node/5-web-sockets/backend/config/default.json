@@ -1,0 +1,6 @@
+{
+  "wsPort": 5000,
+  "serverPort": 8000,
+  "timeOut": 8000,
+  "message": "Notification"
+}
