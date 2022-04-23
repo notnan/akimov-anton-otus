@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import {program} from 'commander'
 import {printError, printSuccess, printTasks} from "./services/log.service.js";
 import {saveKeyValue, TOKEN_DICTIONARY, getKeyValue} from "./services/storage.service.js";
